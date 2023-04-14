@@ -1,0 +1,81 @@
+// BY Twitter@OO27838025
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Sofia+Sans+Condensed:wght@700;900&display=swap" rel="stylesheet">
+    <title>Countdown Timer</title>
+    <style>
+      
+      #countdown-container {
+        width: 100%;
+        height: 30px;
+        background-color: #ffffff;
+        position: relative;
+        border-radius: 3px
+      }
+      
+      #countdown {
+        width: 100%;
+        height: 100%;
+        background-color: #000000;
+        border-radius: 3px
+      }
+      
+      #target-date-label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60px;
+        height: 100%;
+        background-color: #000000;
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        font-size: 12px;
+        font-family: 'Sofia Sans Condensed', sans-serif;
+      }
+      
+    </style>
+  </head>
+  
+  <body>
+    <!-- <h1>Countdown Timer with Gray Progress Bar</h1>
+    -->
+    <div id="countdown-container">
+      <progress id="countdown" value="100" max="100"></progress>
+      <div id="target-date-label"></div>
+    </div>
+    
+    <script>
+    
+      const targetDate = new Date('2023-06-13T00:00:00Z');
+      function updateCountdown() {
+        const now = new Date();
+        const timeDiff = targetDate - now;
+        
+        if (timeDiff <= 0) {
+          document.getElementById('countdown').value = 0;
+          return;
+        }
+        
+        const percent = Math.floor(((now - new Date('2022-06-13T00:00:00Z')) / (targetDate - new Date('2022-06-13T00:00:00Z'))) * 100);
+        
+        const progressBar = document.getElementById('countdown');
+        progressBar.value = percent;
+        progressBar.innerHTML = `${percent}%`;
+        const progressBarWidth = progressBar.clientWidth;
+        const targetDateLabel = document.getElementById('target-date-label');
+        targetDateLabel.textContent = targetDate.toLocaleDateString();
+        targetDateLabel.style.right = `${(100 - percent) * progressBarWidth / 100}px`;
+      }
+
+      setInterval(updateCountdown, 1000);
+
+      const progressBar = document.getElementById('countdown');
+      progressBar.style.filter = 'grayscale(100%)';
+   
+    </script>
+  </body>
+</html>
